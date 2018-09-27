@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for base/helpers.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">All files</a> / <a href="index.html">base</a> helpers.ts
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">29.63% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.77% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">interface Array&lt;T&gt; {
+  reverseIterate(callback);
+  iterate(callback);
+}
+&nbsp;
+interface Date {
+  yyyymmdd(seperator?: string): string;
+  future(days: number): Date;
+  addDays(days: number): Date;
+}
+&nbsp;
+interface Number {
+  formatMoney(c, d, t): string;
+}
+&nbsp;
+interface String {
+  replaceAll(value: any, replacementValue: string): string;
+}
+&nbsp;
+Array.prototype.iterate = (callback) =&gt; {
+  for (let i = 0; i &lt; this.length; i++) {
+<span class="cstat-no" title="statement not covered" >    callback(this[i], i);</span>
+  }
+};
+&nbsp;
+Array.prototype.reverseIterate = <span class="fstat-no" title="function not covered" >(c</span>allback) =&gt; {
+<span class="cstat-no" title="statement not covered" >  for (let i = this.length - 1; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered" >    callback(this[i], i);</span>
+  }
+};
+&nbsp;
+Date.prototype.yyyymmdd = <span class="fstat-no" title="function not covered" >(s</span>eperator?: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >  if (typeof seperator === 'undefined') { <span class="cstat-no" title="statement not covered" >seperator = '/'; </span>}</span>
+<span class="cstat-no" title="statement not covered" >  return this.getUTCFullYear() + seperator</span>
+    + ('0' + (this.getUTCMonth() + 1)).slice(-2) + seperator
+    + ('0' + this.getUTCDate()).slice(-2);
+};
+&nbsp;
+Date.prototype.future = <span class="fstat-no" title="function not covered" >(d</span>ays) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return new Date(Date.now() + (1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * days));</span>
+};
+&nbsp;
+Number.prototype.formatMoney = <span class="fstat-no" title="function not covered" >(c</span>, d, t) =&gt; {
+  let n = <span class="cstat-no" title="statement not covered" >this;</span>
+  const s = <span class="cstat-no" title="statement not covered" >n &lt; 0 ? '-' : '';</span>
+<span class="cstat-no" title="statement not covered" >  c = isNaN(c = Math.abs(c)) ? 2 : c;</span>
+<span class="cstat-no" title="statement not covered" >  d = d === undefined ? '.' : d;</span>
+<span class="cstat-no" title="statement not covered" >  t = t === undefined ? ',' : t;</span>
+  const i = <span class="cstat-no" title="statement not covered" >String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c), 10));</span>
+  let j = <span class="cstat-no" title="statement not covered" >i.length;</span>
+<span class="cstat-no" title="statement not covered" >  j = (j) &gt; 3 ? j % 3 : 0;</span>
+<span class="cstat-no" title="statement not covered" >  if (i) {</span>
+<span class="cstat-no" title="statement not covered" >    return s + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + t) +</span>
+      (c ? d + Math.abs(n - parseFloat(i)).toFixed(c).slice(2) : '');
+  }
+};
+&nbsp;
+String.prototype.replaceAll = <span class="fstat-no" title="function not covered" >(v</span>alue: any, replacementValue: string) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return this.replace(new RegExp(value, 'g'), replacementValue);</span>
+};
+&nbsp;
+Date.prototype.addDays = <span class="fstat-no" title="function not covered" >(d</span>ays: number) =&gt; {
+<span class="cstat-no" title="statement not covered" >  return new Date(this.valueOf() + 864E5 * days);</span>
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Sep 29 2018 09:43:15 GMT-0400 (EDT)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

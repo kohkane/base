@@ -1,0 +1,12 @@
+.webpack
+node_modules
+__test__
+.circleci
+.serverless
+coverage
+jest.config.jest
+LICENSE
+sample.env
+README.md
+docker-compose.yml
+.docker

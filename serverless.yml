@@ -1,0 +1,56 @@
+service:
+  name: base
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: '3000'
+    host: '0.0.0.0'
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: us-east-1
+  profile: kohkane_serverless
+  stage: dev
+  tracing: true
+  apiName: kohkane-base
+  deploymentBucket:
+    name: com.kohkane.base.${self:provider.region}.${self:provider.stage}.deploys
+    serverSideEncryption: AES256
+  apiKeys:
+    - ${self:provider.stage}-key
+  environment:
+    PROJECT_ENV: dev
+
+
+resources:
+  Resources:
+    pathmapping:
+      Type: AWS::ApiGateway::BasePathMapping
+      Properties:
+        BasePath: api
+        DomainName: ${self:provider.stage}-api.kohkane.com
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Stage: ${self:provider.stage}
+
+package:
+  include:
+    - users/**
+  exclude:
+    - .git/**
+    - .circleci/**
+    - users/.test/**
+
+functions:
+  users:
+    handler: handler.getUsers
+    events:
+      - http:
+          method: get
+          path: users/get
+
