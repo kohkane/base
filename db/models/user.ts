@@ -1,24 +1,4 @@
 import { Stripe } from "./stripe";
-/**
- * Used to add security and ease to the user's login and session
- * authentication.
- *
- * Might not need this
- *
- * @author jordanskomer
- */
-class IP {
-  /**
-   * The IPv4 or IPv6 address
-   *
-   * @author jordanskomer
-   */
-  public _ip: string;
-  /**
-   * The date this ip was accessed
-   */
-  public date: number;
-}
 
 /**
  * Defines all of the structure for the users table. This is where all
@@ -30,11 +10,12 @@ class IP {
  */
 export class User {
   /**
-   * The user's email address lowercase
+   * The user's email address lowercase if they have signed up
+   * Random MD5 string if they have not yet signed up
    *
    * @author jordanskomer
    */
-  public _email: string;
+  private _id: string;
   /**
    * The user's first name
    *
@@ -49,7 +30,7 @@ export class User {
   public lname?: string;
   /**
    * The user's phone in digit form. Use the methods
-   * for formatting the number
+   * for formatting the number. Used for 2FA
    *
    * @author jordanskomer
    */
@@ -60,5 +41,36 @@ export class User {
    *
    * @author jordanskomer
    */
-  public stripe: Stripe;
+  public stripe?: Stripe;
+  /**
+   * Creates a new user record
+   *
+   * @param newUser - The User object to create
+   * @param email - The user's email (defaulted to blank)
+   * @author jordanskomer
+   */
+  constructor(
+    newUser: User,
+    email = ''
+  ) {
+    this.assignId(email)
+    Object.assign(this, newUser);
+  }
+  /**
+   * Returns the user's private id
+   *
+   * @author jordanskomer
+   */
+  public get id(): string {
+    return this._id;
+  }
+  /**
+   * Assigns the _id. Sanatizes the email if it isn't blank. Otherwise
+   * it will create a unique ID
+   *
+   * @param email - Blank if no email was provided
+   */
+  private assignId(email): void {
+    this._id = email ? email : generateID();
+  }
 }

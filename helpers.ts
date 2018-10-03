@@ -62,3 +62,11 @@ String.prototype.replaceAll = function(value: any, replacementValue: string) {
 Date.prototype.addDays = function(days: number) {
   return new Date(this.valueOf() + 864E5 * days);
 };
+/**
+ * Generates a unique number Id
+ *
+ * @author jordanskomer
+ */
+const generateID = function(): string {
+  return Math.random().toString(32).substr(2,9);
+};
