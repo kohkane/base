@@ -13,3 +13,5 @@ yarn-error.log
 
 # ENV
 .env
+
+.DS_STORE
