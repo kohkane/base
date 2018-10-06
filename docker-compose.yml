@@ -1,20 +1,16 @@
 version: '3'
 services:
   db:
-    build:
-      context: .
-      dockerfile: ./.docker/db.Dockerfile
-    image: kohkane/db
+    image: jordanskomer/serverless-dynamodb
+    command: sls dynamodb start
     ports:
       - 8000:8000
     restart: always
   serverless:
-    build:
-      context: .
-      dockerfile: ./.docker/functions.Dockerfile
-    image: kohkane/functions
+    image: jordanskomer/serverless
     ports:
       - 3000:3000
+    command: sls offline start
     env_file:
       - .env
     depends_on:

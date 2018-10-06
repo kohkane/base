@@ -1,0 +1,53 @@
+defaults: &defaults
+  docker:
+    - image: jordanskomer/serverless
+
+version: 2
+jobs:
+  lint-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Linting
+          command: yarn run lint
+      - run:
+          name: Testing
+          command: yarn run test
+  deploy-stag:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Deploying to AWS
+          command: |
+            yarn run deploy:stag
+  deploy-prod:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Deploying to AWS
+          command: |
+            yarn run deploy:prod
+
+workflows:
+  version: 2
+  lint-and-test:
+    jobs:
+      - lint-test:
+          filters:
+            branches:
+              ignore: master
+  deploy-stag:
+    jobs:
+      - deploy-stag:
+          filters:
+            branches:
+              only: /release\/[0-9]{12}/
+  deploy-prod:
+    jobs:
+      - deploy-prod:
+          filters:
+            branches:
+              only: master

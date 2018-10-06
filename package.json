@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "serverless offline start",
     "test": "jest",
-    "lint": "tslint --project '.'"
+    "lint": "tslint --project '.'",
+    "deploy:stag": "echo 'coming soon'",
+    "deploy:prod": "echo 'coming soon'"
   },
   "dependencies": {},
   "devDependencies": {
