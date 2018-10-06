@@ -1,20 +1,16 @@
 version: '3'
 services:
   db:
-    build: .
-    image: jordanskomer/serverless
-    environment:
-      ROOT: db
+    image: jordanskomer/serverless-dynamodb
+    command: sls dynamodb start
     ports:
       - 8000:8000
     restart: always
   serverless:
-    build:
-      context: .
     image: jordanskomer/serverless
     ports:
       - 3000:3000
-    command: serverless offline start
+    command: sls offline start
     env_file:
       - .env
     depends_on:
