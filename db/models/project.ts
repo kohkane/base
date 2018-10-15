@@ -9,7 +9,7 @@ export class Project {
   public owner: string;
 
   constructor(name: string, owner: string) {
-    this.id = `${new Date().getTimeReversed()}_${name.sanatize()}`;
+    this.id = `${new Date().getTime()}_${name.sanatize()}`;
     this.name = name;
     this.owner = owner;
   }

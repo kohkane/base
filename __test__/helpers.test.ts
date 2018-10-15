@@ -22,7 +22,7 @@ describe('helpers', () => {
       expect(testDate.yyyymmdd('~')).toBe('2018~06~13');
     });
     test('getTimeReversed', () => {
-      expect(testDate.getTimeReversed()).toBe(0000042688251);
+      expect(testDate.getTimeReversed()).toBe('0000008488251');
     });
   });
 

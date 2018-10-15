@@ -79,19 +79,18 @@ export function create(eventBody: string) {
 export function find(query: {}): Promise<{}> {
   return new Promise((resolve, reject) => {
     checkBody(query, reject, false);
-    // resolve(new Response({
-    //   data: dynamodb.buildQuery('projects', query, true),
-    // }));
     db.query({
       ExpressionAttributeNames: {
         '#name': 'name',
+        '#owner': 'owner',
       },
       ExpressionAttributeValues: {
         ':owner': query['owner'],
       },
       IndexName: 'OwnerIndex',
-      KeyConditionExpression: 'ownerId = :owner',
+      KeyConditionExpression: '#owner = :owner',
       ProjectionExpression: 'id, #name',
+      ScanIndexForward: true,
       TableName: dynamodb.tables.projects,
     }).promise().then((result) => {
       console.log(result);

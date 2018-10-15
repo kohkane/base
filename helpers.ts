@@ -5,7 +5,7 @@ interface Array<T> {
 
 interface Date {
   yyyymmdd(seperator?: string): string;
-  getTimeReversed(): number;
+  getTimeReversed(): string;
 }
 
 interface String {
@@ -36,11 +36,11 @@ Date.prototype.yyyymmdd = function(seperator?: string) {
  * @author jordanskomer
  */
 Date.prototype.getTimeReversed = function() {
-  return parseInt(this.getTime().toString().split('').reverse().join(''), 10);
+  return this.getTime().toString().split('').reverse().join('');
 };
 
 String.prototype.sanatize = function() {
-  return this.toLowerCase().replace(/ /g, '_').replace(/-/g, '').replace(/\./g, '');
+  return this.toLowerCase().replace(/ /g, '_').replace(/\-/g, '_').replace(/[^\w]/g, '');
 };
 
 /**

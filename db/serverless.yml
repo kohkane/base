@@ -85,6 +85,8 @@ resources:
             KeySchema:
               - AttributeName: owner
                 KeyType: HASH
+              - AttributeName: id
+                KeyType: RANGE
             Projection:
               ProjectionType: KEYS_ONLY
             ProvisionedThroughput:

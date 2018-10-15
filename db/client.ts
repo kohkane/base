@@ -36,8 +36,10 @@ function generateDynamodbParam(
  * @author jordanskomer
  */
 export function buildQuery(table: string, query: {}, onlyAttributes?: boolean) {
-  console.log('build')
-  let exp = '', expVals = {}, expAttrs = {}, projExp = '';
+  const expVals = {};
+  const expAttrs = {};
+  let exp = '';
+  let projExp = '';
   Object.keys(query).iterate((key, count) => {
     const escapedKey = key.replace(/_/g, '');
     const notLast = Object.keys(query).length > 0 && count !== Object.keys(query).length - 1;
@@ -49,6 +51,5 @@ export function buildQuery(table: string, query: {}, onlyAttributes?: boolean) {
       projExp += `#${escapedKey}${notLast ? ', ' : ''}`;
     }
   });
-  console.log(generateDynamodbParam(this.tables[table], expVals, exp, expAttrs, projExp))
   return this.generateDynamodbParam(this.tables[table], expVals, exp, expAttrs, projExp);
 }

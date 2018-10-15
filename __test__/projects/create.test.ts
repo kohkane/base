@@ -9,13 +9,13 @@ describe('/projects', () => {
     db.raw.createTable({
       AttributeDefinitions: [
         {
-          AttributeName: '_id',
+          AttributeName: 'id',
           AttributeType: 'S',
         },
       ],
       KeySchema: [
         {
-          AttributeName: '_id',
+          AttributeName: 'id',
           KeyType: 'HASH',
         },
       ],
@@ -46,7 +46,7 @@ describe('/projects', () => {
       })).then((result) => {
         const response = new Response(result);
         expect(response.status).toBe('success');
-        expect(response.data._id).toBe(newProjectName.sanatize());
+        expect(response.data.id).toContain(newProjectName.sanatize());
         expect(response.data.owner).toBe(newProjectOwner);
         done();
       });
@@ -61,21 +61,32 @@ describe('/projects', () => {
         done();
       });
     });
+    test('Name and Owner is required', (done) => {
+      create(JSON.stringify({
+      })).catch((error) => {
+        const response = new Response(error);
+        expect(response.status).toBe('fail');
+        expect(response.message).toContain('Missing owner and name');
+        done();
+      });
+    });
     test('Name is required', (done) => {
       create(JSON.stringify({
         owner: newProjectOwner,
       })).catch((error) => {
         const response = new Response(error);
         expect(response.status).toBe('fail');
+        expect(response.message).toContain('Missing name');
         done();
       });
     });
     test('Owner is required', (done) => {
       create(JSON.stringify({
-        owner: newProjectOwner,
+        name: newProjectName,
       })).catch((error) => {
         const response = new Response(error);
         expect(response.status).toBe('fail');
+        expect(response.message).toContain('Missing owner');
         done();
       });
     });
