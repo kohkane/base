@@ -1,19 +1,18 @@
 import { APIGatewayEvent, Callback, Context, Handler } from 'aws-lambda';
 import './helpers';
-import * as users from './users/users';
+import * as $users from './users';
+import * as $projects from './projects';
 
 const handler = (promise, cb) => {
   promise.then((result) => {
     cb(undefined, {
       body: JSON.stringify(result),
       headers: { 'Content-Type': 'application/json' },
-      statusCode: 200,
     });
   }).catch((error) => {
     cb(undefined, {
-      body: JSON.stringify(error),
-      headers: { 'Content-Type': 'application/json' },
       statusCode: error.statusCode,
+      body: JSON.stringify(error)
     });
   });
 };
@@ -25,7 +24,20 @@ const handler = (promise, cb) => {
  * @param cb
  */
 export const getUsers: Handler = (event: APIGatewayEvent, context: Context, cb: Callback) => {
-  handler(users.find({
+  handler($users.find({
     email: 'test@kohkane.com',
   }), cb);
 };
+
+export const projects: Handler = (event: APIGatewayEvent, context: Context, cb: Callback) => {
+  switch (`${event.path} - ${event.httpMethod}`) {
+    case '/projects - GET':
+      handler($projects.find(event.queryStringParameters), cb);
+      break;
+    case '/projects/new - POST':
+      handler($projects.create(event.body), cb);
+      break;
+  }
+}
+
+

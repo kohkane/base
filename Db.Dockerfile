@@ -21,4 +21,5 @@ COPY ./ ./usr/src/app
 WORKDIR /usr/src/app/db
 
 RUN sls dynamodb install
+RUN yarn run seed
 

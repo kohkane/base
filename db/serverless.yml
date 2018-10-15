@@ -46,6 +46,9 @@ custom:
         sources:
           - table: ${self:custom.stage}-users
             sources: [./seeds/users.json]
+          - table: ${self:custom.stage}-projects
+            sources: [./seeds/projects.json]
+
 
 resources:
   Resources:
@@ -54,24 +57,36 @@ resources:
       Properties:
         TableName: ${self:custom.stage}-users
         AttributeDefinitions:
-          - AttributeName: _id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: _id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    versionsTable:
+    projectsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.stage}-versions
+        TableName: ${self:custom.stage}-projects
         AttributeDefinitions:
-          - AttributeName: _id
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: owner
             AttributeType: S
         KeySchema:
-          - AttributeName: _id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        GlobalSecondaryIndexes:
+          - IndexName: OwnerIndex
+            KeySchema:
+              - AttributeName: owner
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1

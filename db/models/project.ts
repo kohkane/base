@@ -4,18 +4,13 @@
  * @author jordanskomer
  */
 export class Project {
-  /**
-   * This contains the ID of the project which is created using a
-   * reverseTimestamp_projectname format to sort them by creation date
-   *
-   * Note you would access using the id getter as this is set in the constructor
-   *
-   * @author jordanskomer
-   */
-  private _id: string;
+  public id: string;
+  public name: string;
+  public owner: string;
 
-
-  get id(): string {
-    return this._id;
+  constructor(name: string, owner: string) {
+    this.id = `${new Date().getTimeReversed()}_${name.sanatize()}`;
+    this.name = name;
+    this.owner = owner;
   }
 }
