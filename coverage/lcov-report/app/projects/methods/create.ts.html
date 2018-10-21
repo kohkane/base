@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for app/db/models/response.ts</title>
+    <title>Code coverage report for app/projects/methods/create.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">All files</a> / <a href="index.html">app/db/models</a> response.ts
+      <a href="../../../index.html">All files</a> / <a href="index.html">app/projects/methods</a> create.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">86.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>13/15</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/2</span>
+        <span class='fraction'>4/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">86.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/6</span>
+        <span class='fraction'>13/15</span>
       </div>
     </div>
   </div>
@@ -98,16 +98,9 @@
 53
 54
 55
-56</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+56
+57</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,20 +109,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -141,6 +133,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,66 +147,71 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export enum ResponseStatus {
-  /**
-   * Description:
-   * All went well, and (usually) some data was returned.
-   *
-   * Required Keys:
-   * status, data
-   *
-   * Optional Keys:
-   */
-  success = 'success',
-  /**
-   * Description:
-   * There was a problem with the data submitted, or some pre-condition of
-   * the API call wasn't satisfied
-   *
-   * Required Keys:
-   * status, data
-   *
-   * Optional Keys:
-   */
-  fail = 'fail',
-  /**
-   * Description:
-   * An error occurred in processing the request, i.e. an exception was thrown
-   *
-   * Required Keys:
-   * status, message
-   *
-   * Optional Keys:
-   * code, data
-   */
-  error = 'error',
-}
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { doc, invalidParams, tables } from '../../db/client';
+import { Project } from '../../db/models/project';
+import { Response, ResponseStatus } from '../../db/models/response';
 /**
- * Based on the JSend format
+ * Creates a new project. Will fail if the name or owner field is missing
+ * on the POST request
  *
- * https://labs.omniti.com/labs/jsend
+ * @param eventBody - The body from the POST request
+ * @author jordanskomer
  */
-export class Response {
-  public status: ResponseStatus;
-  public data?: any;
-  public message?: string;
-  public code?: any;
-&nbsp;
-  constructor(object: {
-    status?: ResponseStatus,
-    data?: any,
-    message?: string,
-    code?: any,
-    statusCode?: number;
-  }) {
-    Object.assign(this, object);
-  }
-}
-&nbsp;</pre></td></tr>
+export function create(eventBody: string) {
+  return new Promise((resolve, reject) =&gt; {
+    const jsonBody = JSON.parse(eventBody);
+    invalidParams(jsonBody, reject, ['name', 'owner']);
+    const Item = new Project(jsonBody.name, jsonBody.owner);
+    doc.get({
+      Key: {
+        id: Item.id,
+      },
+      ProjectionExpression: 'id',
+      TableName: tables.projects,
+    }).promise().then((r) =&gt; {
+      if (r.Item) {
+        reject(new Response({
+          data: jsonBody,
+          message: 'Project already exists',
+          status: ResponseStatus.fail,
+          statusCode: 409,
+        }));
+      } else {
+        doc.put({
+          Item,
+          TableName: tables.projects,
+        }).promise().then((result) =&gt; {
+          resolve(new Response({
+            data: Item,
+            status: ResponseStatus.success,
+          }));
+        }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >          reject(new Response({</span>
+            code: error.code,
+            message: error.message,
+            status: ResponseStatus.fail,
+            statusCode: error.statusCode,
+          }));
+        });
+      }
+    }).catch(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >      reject(new Response({</span>
+        code: e.code,
+        message: e.message,
+        status: ResponseStatus.fail,
+        statusCode: e.statusCode,
+      }));
+    });
+  });
+}</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->

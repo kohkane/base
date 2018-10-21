@@ -1,5 +1,6 @@
 import * as AWS from 'aws-sdk';
 import * as process from 'process';
+import { Response, ResponseStatus } from './models/response';
 
 const options = {
   endpoint: 'http://172.18.18.10:8000',
@@ -35,7 +36,7 @@ function generateDynamodbParam(
  * @param query - An object of items to query the DB by
  * @author jordanskomer
  */
-export function buildQuery(table: string, query: {}, onlyAttributes?: boolean) {
+export function buildQuery(table: string, query: {}, onlyAttributes?: string[]) {
   const expVals = {};
   const expAttrs = {};
   let exp = '';
@@ -46,10 +47,52 @@ export function buildQuery(table: string, query: {}, onlyAttributes?: boolean) {
     exp += `#${escapedKey} = :${escapedKey}${notLast ? ' AND ' : ''}`;
     expVals[`:${escapedKey}`] = query[key];
     expAttrs[`#${escapedKey}`] = key;
-    // Only return attributes passed in query
-    if (onlyAttributes) {
-      projExp += `#${escapedKey}${notLast ? ', ' : ''}`;
-    }
   });
-  return this.generateDynamodbParam(this.tables[table], expVals, exp, expAttrs, projExp);
+  // If attributes are passed in only return results with those attributes
+  if (onlyAttributes && onlyAttributes.length > 0) {
+    onlyAttributes.iterate((attribute, count) => {
+      expAttrs[`#${attribute}`] = attribute;
+      projExp += count !== onlyAttributes.length - 1 ? `#${attribute},` : `#${attribute}`;
+    });
+  }
+  return generateDynamodbParam(tables[table], expVals, exp, expAttrs, projExp);
 }
+/**
+ * Checks that the correct parameters is in the passed in payload
+ *
+ * @param jsonBody - The body parsed from the event
+ * @param reject - The promise's reject function if error is found
+ * @param bothRequired - True if both name and owner should be present, false if only one
+ * @author jordanskoemer
+ */
+export const invalidParams = (jsonObject, reject, requiredFields?: string[]) => {
+  if (requiredFields) {
+    let notPresent = '';
+    const missingFields = requiredFields.filter((field) => !jsonObject[field]);
+    missingFields.iterate((field, count) => {
+      if (count === missingFields.length - 1) {
+        notPresent += notPresent ? `and ${field}` : field;
+      } else {
+        notPresent += field + (count === missingFields.length - 2 ? ' ' : ', ');
+      }
+    });
+
+    if (notPresent) {
+      reject(new Response({
+        code: 400,
+        data: jsonObject,
+        message: `Invalid Request - Missing ${notPresent}`,
+        status: ResponseStatus.fail,
+      }));
+    }
+  } else {
+    if (!jsonObject.id && !jsonObject.owner) {
+      reject(new Response({
+        code: 400,
+        data: jsonObject,
+        message: 'Invalid Request - Missing id or owner',
+        status: ResponseStatus.fail,
+      }));
+    }
+  }
+};

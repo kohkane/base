@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">32.14% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/28</span>
+        <span class='fraction'>21/42</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.78% </span>
+        <span class="strong">38.24% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/18</span>
+        <span class='fraction'>13/34</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">42.86% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/3</span>
+        <span class='fraction'>3/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.5% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/24</span>
+        <span class='fraction'>20/40</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -96,7 +96,53 @@
 51
 52
 53
-54</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -142,15 +188,60 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import * as AWS from 'aws-sdk';
 import * as process from 'process';
+import { Response, ResponseStatus } from './models/response';
 &nbsp;
 const options = {
   endpoint: 'http://172.18.18.10:8000',
@@ -186,29 +277,73 @@ export const tables = {
  * @param query - An object of items to query the DB by
  * @author jordanskomer
  */
-<span class="fstat-no" title="function not covered" >export function buildQuery(</span>table: string, query: {}, onlyAttributes?: boolean) {
-<span class="cstat-no" title="statement not covered" >  console.log('build')</span>
-  let exp = <span class="cstat-no" title="statement not covered" >'',</span> expVals = <span class="cstat-no" title="statement not covered" >{},</span> expAttrs = <span class="cstat-no" title="statement not covered" >{},</span> projExp = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="fstat-no" title="function not covered" >export function buildQuery(</span>table: string, query: {}, onlyAttributes?: string[]) {
+  const expVals = <span class="cstat-no" title="statement not covered" >{};</span>
+  const expAttrs = <span class="cstat-no" title="statement not covered" >{};</span>
+  let exp = <span class="cstat-no" title="statement not covered" >'';</span>
+  let projExp = <span class="cstat-no" title="statement not covered" >'';</span>
 <span class="cstat-no" title="statement not covered" >  Object.keys(query).iterate(<span class="fstat-no" title="function not covered" >(k</span>ey, count) =&gt; {</span>
     const escapedKey = <span class="cstat-no" title="statement not covered" >key.replace(/_/g, '');</span>
     const notLast = <span class="cstat-no" title="statement not covered" >Object.keys(query).length &gt; 0 &amp;&amp; count !== Object.keys(query).length - 1;</span>
 <span class="cstat-no" title="statement not covered" >    exp += `#${escapedKey} = :${escapedKey}${notLast ? ' AND ' : ''}`;</span>
 <span class="cstat-no" title="statement not covered" >    expVals[`:${escapedKey}`] = query[key];</span>
 <span class="cstat-no" title="statement not covered" >    expAttrs[`#${escapedKey}`] = key;</span>
-    // Only return attributes passed in query
-<span class="cstat-no" title="statement not covered" >    if (onlyAttributes) {</span>
-<span class="cstat-no" title="statement not covered" >      projExp += `#${escapedKey}${notLast ? ', ' : ''}`;</span>
-    }
   });
-<span class="cstat-no" title="statement not covered" >  console.log(generateDynamodbParam(this.tables[table], expVals, exp, expAttrs, projExp))</span>
-<span class="cstat-no" title="statement not covered" >  return this.generateDynamodbParam(this.tables[table], expVals, exp, expAttrs, projExp);</span>
-}</pre></td></tr>
+  // If attributes are passed in only return results with those attributes
+<span class="cstat-no" title="statement not covered" >  if (onlyAttributes &amp;&amp; onlyAttributes.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >    onlyAttributes.iterate(<span class="fstat-no" title="function not covered" >(a</span>ttribute, count) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      expAttrs[`#${attribute}`] = attribute;</span>
+<span class="cstat-no" title="statement not covered" >      projExp += count !== onlyAttributes.length - 1 ? `#${attribute},` : `#${attribute}`;</span>
+    });
+  }
+<span class="cstat-no" title="statement not covered" >  return generateDynamodbParam(tables[table], expVals, exp, expAttrs, projExp);</span>
+}
+/**
+ * Checks that the correct parameters is in the passed in payload
+ *
+ * @param jsonBody - The body parsed from the event
+ * @param reject - The promise's reject function if error is found
+ * @param bothRequired - True if both name and owner should be present, false if only one
+ * @author jordanskoemer
+ */
+export const invalidParams = (jsonObject, reject, requiredFields?: string[]) =&gt; {
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (requiredFields) {
+    let notPresent = '';
+    const missingFields = requiredFields.filter((field) =&gt; !jsonObject[field]);
+    missingFields.iterate((field, count) =&gt; {
+      if (count === missingFields.length - 1) {
+        notPresent += notPresent ? `and ${field}` : field;
+      } else {
+        notPresent += field + (count === missingFields.length - 2 ? ' ' : <span class="branch-1 cbranch-no" title="branch not covered" >', ')</span>;
+      }
+    });
+&nbsp;
+    if (notPresent) {
+      reject(new Response({
+        code: 400,
+        data: jsonObject,
+        message: `Invalid Request - Missing ${notPresent}`,
+        status: ResponseStatus.fail,
+      }));
+    }
+  } else {
+<span class="cstat-no" title="statement not covered" >    if (!jsonObject.id &amp;&amp; !jsonObject.owner) {</span>
+<span class="cstat-no" title="statement not covered" >      reject(new Response({</span>
+        code: 400,
+        data: jsonObject,
+        message: 'Invalid Request - Missing id or owner',
+        status: ResponseStatus.fail,
+      }));
+    }
+  }
+};
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 15 2018 13:01:47 GMT+0000 (UTC)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Oct 21 2018 13:39:33 GMT+0000 (UTC)
 </div>
 </div>
 <script src="../../prettify.js"></script>

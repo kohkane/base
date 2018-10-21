@@ -1,0 +1,6 @@
+users:
+  handler: handler.getUsers
+  events:
+    - http:
+      path: users
+      method: get

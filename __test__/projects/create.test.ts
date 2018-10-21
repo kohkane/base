@@ -1,9 +1,9 @@
 import 'helpers';
 import * as db from '../../db/client';
 import { Response } from '../../db/models/response';
-import { create } from '../../projects/index';
+import { create } from '../../projects';
 
-describe('/projects', () => {
+describe('/project', () => {
   // Setup Projects DB table
   beforeAll(async (done) => {
     db.raw.createTable({
@@ -11,6 +11,37 @@ describe('/projects', () => {
         {
           AttributeName: 'id',
           AttributeType: 'S',
+        },
+        {
+          AttributeName: 'owner',
+          AttributeType: 'S',
+        },
+        {
+          AttributeName: 'createdDate',
+          AttributeType: 'N',
+        },
+      ],
+      GlobalSecondaryIndexes: [
+        {
+          IndexName: 'OwnerIndex',
+          KeySchema: [
+            {
+              AttributeName: 'owner',
+              KeyType: 'HASH',
+            },
+            {
+              AttributeName: 'createdDate',
+              KeyType: 'RANGE',
+            },
+          ],
+          Projection: {
+            NonKeyAttributes: ['id', 'name'],
+            ProjectionType: 'INCLUDE',
+          },
+          ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+          },
         },
       ],
       KeySchema: [
@@ -58,6 +89,7 @@ describe('/projects', () => {
       })).catch((error) => {
         const response = new Response(error);
         expect(response.status).toBe('fail');
+        expect(response.message).toBe('Project already exists');
         done();
       });
     });
@@ -66,7 +98,7 @@ describe('/projects', () => {
       })).catch((error) => {
         const response = new Response(error);
         expect(response.status).toBe('fail');
-        expect(response.message).toContain('Missing owner and name');
+        expect(response.message).toContain('Invalid Request - Missing name and owner');
         done();
       });
     });
@@ -76,7 +108,7 @@ describe('/projects', () => {
       })).catch((error) => {
         const response = new Response(error);
         expect(response.status).toBe('fail');
-        expect(response.message).toContain('Missing name');
+        expect(response.message).toContain('Invalid Request - Missing name');
         done();
       });
     });
@@ -89,6 +121,20 @@ describe('/projects', () => {
         expect(response.message).toContain('Missing owner');
         done();
       });
+    });
+  });
+  describe('/ - GET', () => {
+    test('Find all of a user\'s projects', (done) => {
+      done();
+    });
+    test('Find project by id', (done) => {
+      done();
+    });
+    test('No projects found for user', (done) => {
+      done();
+    });
+    test('No project found by id', (done) => {
+      done();
     });
   });
 });

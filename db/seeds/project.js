@@ -2,9 +2,10 @@ var faker = require('faker');
 
 function create(project, user) {
   return {
-    id: `${faker.date.past().getTime()}_${project.toLowerCase().replace(/ /g, '_').replace(/-/g, '').replace(/\./g, '')}`,
+    id: project.toLowerCase().replace(/ /g, '_').replace(/-/g, '').replace(/\./g, ''),
     name: project,
     owner: user.id,
+    createdDate: faker.date.past().getTime()
   }
 }
 

@@ -74,6 +74,8 @@ resources:
             AttributeType: S
           - AttributeName: owner
             AttributeType: S
+          - AttributeName: createdDate
+            AttributeType: N
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -85,10 +87,13 @@ resources:
             KeySchema:
               - AttributeName: owner
                 KeyType: HASH
-              - AttributeName: id
+              - AttributeName: createdDate
                 KeyType: RANGE
             Projection:
-              ProjectionType: KEYS_ONLY
+              NonKeyAttributes:
+                - id
+                - name
+              ProjectionType: INCLUDE
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1

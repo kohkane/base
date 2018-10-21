@@ -47,19 +47,6 @@ package:
     - users/.test/**
 
 functions:
-  users:
-    handler: handler.getUsers
-    events:
-      - http:
-          method: get
-          path: users
-  projects:
-    handler: handler.projects
-    events:
-      - http:
-          method: get
-          path: projects
-      - http:
-          method: post
-          path: projects/new
+  - ${file(./users/function.yml)}
+  - ${file(./projects/function.yml)}
 
