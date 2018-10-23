@@ -12,7 +12,7 @@ export function create(eventBody: string) {
   return new Promise((resolve, reject) => {
     const jsonBody = JSON.parse(eventBody);
     invalidParams(jsonBody, reject, ['name', 'owner']);
-    const Item = new Project(jsonBody.name, jsonBody.owner);
+    const Item = new Project({ name: jsonBody.name, owner: jsonBody.owner }, true);
     doc.get({
       Key: {
         id: Item.id,

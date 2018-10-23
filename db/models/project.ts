@@ -1,18 +1,26 @@
+import { Model } from './model';
+
 /**
  * Used to determine what versions belongs to what Wordpress project
  *
  * @author jordanskomer
  */
-export class Project {
-  public id: string;
+export class Project extends Model {
   public name: string;
   public owner: string;
-  public createdDate: number;
 
-  constructor(name: string, owner: string, createdDate?: number) {
-    this.id = name.sanatize();
-    this.createdDate = createdDate ? createdDate : new Date().getTime();
-    this.name = name;
-    this.owner = owner;
+  constructor(
+    fields?: {
+      createdDate?: number,
+      id?: string,
+      name?: string,
+      owner?: string,
+    },
+    isNew?: boolean,
+  ) {
+    super(isNew, fields.createdDate);
+    if (fields.name) { this.name = fields.name; }
+    if (fields.owner) { this.owner = fields.owner; }
+    if ((isNew && fields.name) || (!isNew && fields.id)) { super.id = fields.id ? fields.id : fields.name.sanatize(); }
   }
 }
