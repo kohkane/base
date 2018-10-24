@@ -29,7 +29,7 @@ describe('helpers', () => {
   describe('String', () => {
     const testString = 'Test.Test_ Test-';
     test('sanatize', () => {
-      expect(testString.sanatize()).toBe('testtest__test');
+      expect(testString.sanatize()).toBe('testtest__test_');
     });
   });
 });
