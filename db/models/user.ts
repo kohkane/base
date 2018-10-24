@@ -1,4 +1,4 @@
-import { Stripe } from "./stripe";
+import { Stripe } from './stripe';
 
 /**
  * Defines all of the structure for the users table. This is where all
@@ -9,13 +9,6 @@ import { Stripe } from "./stripe";
  * @author jordanskomer
  */
 export class User {
-  /**
-   * The user's email address lowercase if they have signed up
-   * Random MD5 string if they have not yet signed up
-   *
-   * @author jordanskomer
-   */
-  private _id: string;
   /**
    * The user's first name
    *
@@ -43,6 +36,17 @@ export class User {
    */
   public stripe?: Stripe;
   /**
+   * The user's email
+   */
+  public email?: string;
+  /**
+   * The user's email address lowercase if they have signed up
+   * Random MD5 string if they have not yet signed up
+   *
+   * @author jordanskomer
+   */
+  private id: string;
+  /**
    * Creates a new user record
    *
    * @param newUser - The User object to create
@@ -51,26 +55,9 @@ export class User {
    */
   constructor(
     newUser: User,
-    email = ''
+    email = '',
   ) {
-    this.assignId(email)
+    this.id = generateID();
     Object.assign(this, newUser);
-  }
-  /**
-   * Returns the user's private id
-   *
-   * @author jordanskomer
-   */
-  public get id(): string {
-    return this._id;
-  }
-  /**
-   * Assigns the _id. Sanatizes the email if it isn't blank. Otherwise
-   * it will create a unique ID
-   *
-   * @param email - Blank if no email was provided
-   */
-  private assignId(email): void {
-    this._id = email ? email : generateID();
   }
 }

@@ -5,16 +5,11 @@ interface Array<T> {
 
 interface Date {
   yyyymmdd(seperator?: string): string;
-  future(days: number): Date;
-  addDays(days: number): Date;
-}
-
-interface Number {
-  formatMoney(c, d, t): string;
+  getTimeReversed(): string;
 }
 
 interface String {
-  replaceAll(value: any, replacementValue: string): string;
+  sanatize(): string;
 }
 
 Array.prototype.iterate = function(callback) {
@@ -35,38 +30,24 @@ Date.prototype.yyyymmdd = function(seperator?: string) {
     + ('0' + (this.getUTCMonth() + 1)).slice(-2) + seperator
     + ('0' + this.getUTCDate()).slice(-2);
 };
-
-Date.prototype.future = function(days) {
-  return new Date(Date.now() + (1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * days));
+/**
+ * Returns the dates timestamp in reverse order
+ *
+ * @author jordanskomer
+ */
+Date.prototype.getTimeReversed = function() {
+  return this.getTime().toString().split('').reverse().join('');
 };
 
-Number.prototype.formatMoney = function(c, d, t) {
-  let n = this;
-  const s = n < 0 ? '-' : '';
-  c = isNaN(c = Math.abs(c)) ? 2 : c;
-  d = d === undefined ? '.' : d;
-  t = t === undefined ? ',' : t;
-  const i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c), 10));
-  let j = i.length;
-  j = (j) > 3 ? j % 3 : 0;
-  if (i) {
-    return s + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + t) +
-      (c ? d + Math.abs(n - parseFloat(i)).toFixed(c).slice(2) : '');
-  }
+String.prototype.sanatize = function() {
+  return this.toLowerCase().replace(/ /g, '_').replace(/\-/g, '_').replace(/[^\w]/g, '');
 };
 
-String.prototype.replaceAll = function(value: any, replacementValue: string) {
-  return this.replace(new RegExp(value, 'g'), replacementValue);
-};
-
-Date.prototype.addDays = function(days: number) {
-  return new Date(this.valueOf() + 864E5 * days);
-};
 /**
  * Generates a unique number Id
  *
  * @author jordanskomer
  */
-const generateID = function(): string {
-  return Math.random().toString(32).substr(2,9);
+const generateID = () => {
+  return Math.random().toString(32).substr(2, 9);
 };

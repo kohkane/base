@@ -1,0 +1,19 @@
+projects:
+  handler: handler.projects
+  description: Handles all routes associated with interfacing with the projects table
+  events:
+    - http:
+        path: projects
+        method: get
+    - http:
+        path: project/new
+        method: post
+    - http:
+        path: project/{id}
+        method: get
+    - http:
+        path: project/{id}
+        method: put
+    - http:
+        path: project/{id}
+        method: delete

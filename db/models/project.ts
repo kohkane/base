@@ -1,21 +1,26 @@
+import { Model } from './model';
+
 /**
  * Used to determine what versions belongs to what Wordpress project
  *
  * @author jordanskomer
  */
-export class Project {
-  /**
-   * This contains the ID of the project which is created using a
-   * reverseTimestamp_projectname format to sort them by creation date
-   *
-   * Note you would access using the id getter as this is set in the constructor
-   *
-   * @author jordanskomer
-   */
-  private _id: string;
+export class Project extends Model {
+  public name: string;
+  public owner: string;
 
-
-  get id(): string {
-    return this._id;
+  constructor(
+    fields?: {
+      createdDate?: number,
+      id?: string,
+      name?: string,
+      owner?: string,
+    },
+    isNew?: boolean,
+  ) {
+    super(isNew, fields.createdDate);
+    if (fields.name) { this.name = fields.name; }
+    if (fields.owner) { this.owner = fields.owner; }
+    if ((isNew && fields.name) || (!isNew && fields.id)) { super.id = fields.id ? fields.id : fields.name.sanatize(); }
   }
 }

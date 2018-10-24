@@ -1,11 +1,17 @@
-version: '3'
+version: '2'
 services:
   db:
+    build:
+      context: .
+      dockerfile: Db.Dockerfile
     image: jordanskomer/serverless-dynamodb
     command: sls dynamodb start
     ports:
       - 8000:8000
     restart: always
+    networks:
+      backend:
+        ipv4_address: 172.18.18.10
   serverless:
     image: jordanskomer/serverless
     ports:
@@ -15,6 +21,19 @@ services:
       - .env
     depends_on:
       - db
+    networks:
+      - backend
     volumes:
       - ./:/usr/src/app
       - ./package.json:/usr/src/app/package.json
+
+networks:
+  backend:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.18.18.0/24
+        gateway: 172.18.18.1
