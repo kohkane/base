@@ -1,4 +1,5 @@
-import { File, Filelist } from "./file";
+import { File } from './file';
+import { Filelist } from './fileList';
 
 /**
  * Used to track the state of the current version. Helpful for
@@ -34,7 +35,7 @@ export class Version {
    *
    * @author jordanskomer
    */
-  public _id: string;
+  public id: string;
   /**
    * The id of the project that is on the users' table.
    * This is used to form the file paths
@@ -56,8 +57,6 @@ export class Version {
    * @author jordanskomer
    */
   public access: string[];
-
-  public
   /**
    * The database file for this versions code
    *

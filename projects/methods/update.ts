@@ -37,14 +37,12 @@ function buildUpdateQuery(projectId, body) {
  */
 export function update(projectId: string, body: {}) {
   return new Promise((resolve, reject) => {
-    console.log(buildUpdateQuery(projectId, body))
     doc.update(buildUpdateQuery(projectId, body)).promise().then((result) => {
       resolve(new Response({
         data: result,
         status: ResponseStatus.success,
       }));
     }).catch((error) => {
-      console.log(error);
       resolve(new Response({
         code: error.code,
         message: error.message,

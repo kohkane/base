@@ -19,11 +19,11 @@ export function find(query: {}): Promise<{}> {
   Object.keys(query).iterate((key, count) => {
     exp += `${key} = :${key}` +
       `${Object.keys(query).length > 0 && count !== Object.keys(query).length - 1 ? ' AND ' : ''}`;
-    expVals[`:${key}`] = { "S": query[key] };
+    expVals[`:${key}`] = query[key];
   });
   return db.query({
     ...defaultQueryParams,
     ExpressionAttributeValues: expVals,
     KeyConditionExpression: exp,
   }).promise();
-};
+}
