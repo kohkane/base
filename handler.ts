@@ -45,6 +45,7 @@ export const getUsers: Handler = (event: APIGatewayEvent, context: Context, cb: 
  * @param cb
  */
 export const projects: Handler = (event: APIGatewayEvent, context: Context, cb: Callback) => {
+  console.log(`${event.requestContext.resourcePath} - ${event.httpMethod}`)
   switch (`${event.requestContext.resourcePath} - ${event.httpMethod}`) {
     case '/project - GET':
       handler($projects.find(event.queryStringParameters), cb);
@@ -60,6 +61,18 @@ export const projects: Handler = (event: APIGatewayEvent, context: Context, cb: 
       break;
     case '/project/{id} - DELETE':
       handler($projects.remove(event.pathParameters.id), cb);
+      break;
+    case '/project/{id} - DELETE':
+      handler($projects.remove(event.pathParameters.id), cb);
+      break;
+    case '/project/{id} - DELETE':
+      handler($projects.remove(event.pathParameters.id), cb);
+      break;
+    case '/version/new - POST':
+      handler($projects.newVersion(event.body), cb);
+      break;
+    case '/version - GET':
+      handler($projects.getVersion(event.queryStringParameters), cb);
       break;
     default:
       cb(undefined, {
