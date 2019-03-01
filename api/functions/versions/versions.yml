@@ -1,0 +1,43 @@
+versionsGet:
+  handler: api/functions/versions/methods/get.handler
+  description: Gets a specific, or current version for the signed in User
+  package:
+    include:
+      - api/functions/versions/methods/get.ts
+  events:
+    - http:
+        path: version
+        method: get
+        cors: true
+        documentation:
+          summary: "Gets a specific or current version"
+          description: "Retrieves a specific or current version based on if an Id is optionally set"
+          tags:
+            - "GET"
+          requestHeaders:
+            -
+              name: "x-api-key"
+              description: "The signed in user's api key"
+          queryParams:
+            -
+              name: "username"
+              description: "The username of the user to find the project of"
+              required: true
+            -
+              name: "project"
+              description: "The slug of the project to get the version of"
+              required: true
+            -
+              name: "id"
+              description: "The id of a version to get"
+          methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": VersionsGetResponse
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse401Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse403Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
+
+

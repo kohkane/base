@@ -4,11 +4,7 @@ service:
 plugins:
   - serverless-webpack
   - serverless-offline
-
-custom:
-  serverless-offline:
-    port: '3000'
-    host: '0.0.0.0'
+  - serverless-aws-documentation
 
 provider:
   name: aws
@@ -40,25 +36,67 @@ provider:
        Resource: "arn:aws:s3:::com.kohkane.deploy/*"
 
 package:
-  include:
-    - users/**
+  individually: true
   exclude:
-    - .git/**
-    - .circleci/**
-    - users/.test/**
+    - .*/**
+
+custom:
+  serverless-offline:
+    port: '3000'
+    host: '0.0.0.0'
+  documentation:
+    api:
+      info:
+        version: "0.0.1"
+        title: The API for Kohkane
+        description: The API that powers all of the Kohkane products
+        termsOfService: https://kohkane.com/tos
+        contact:
+          name: Jordan Skomer
+          url: https://kohkane.com
+          email: dev@kohkane.com
+        license:
+          name: MIT
+          url: https://kohkane.com/license
+    models:
+      -
+        name: ErrorResponse
+        description: "The response that gets returned when an error is encountered"
+        contentType: "application/json"
+        schema: ${file(api/functions/schemas/ErrorResponse.json)}
+      -
+        name: VersionsGetResponse
+        contentType: "application/json"
+        schema: ${file(api/functions/versions/schemas/get.json)}
+  commonModelSchemaFragments:
+    MethodResponse400Json:
+      statusCode: "400"
+      responseModels:
+        "application/json": ErrorResponse
+    MethodResponse401Json:
+      statusCode: "401"
+      responseModels:
+        "application/json": ErrorResponse
+    MethodResponse403Json:
+      statusCode: "403"
+      responseModels:
+        "application/json": ErrorResponse
+    MethodResponse404Json:
+      statusCode: "404"
+      responseModels:
+        "application/json": ErrorResponse
 
 functions:
-  # - ${file(./users/function.yml)}
-  - ${file(./projects/function.yml)}
+  - ${file(api/functions/versions/versions.yml)}
 
-# resources:
-#   Resources:
-#     pathmapping:
-#       Type: AWS::ApiGateway::BasePathMapping
-#       Properties:
-#         BasePath: dev
-#         DomainName: api.kohkane.com
-#         RestApiId:
-#           Ref: ApiGatewayRestApi
-#         Stage: dev
+resources:
+  Resources:
+    pathmapping:
+      Type: AWS::ApiGateway::BasePathMapping
+      Properties:
+        BasePath: ${self:provider.stage}
+        DomainName: api.kohkane.com
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        Stage: ${self:provider.stage}
 

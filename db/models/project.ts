@@ -10,13 +10,13 @@ export class Project extends Model {
   public owner: string;
 
   constructor(
-    fields?: {
+    public fields?: {
       createdDate?: number,
       id?: string,
       name?: string,
       owner?: string,
     },
-    isNew?: boolean,
+    public isNew?: boolean,
   ) {
     super(isNew, fields.createdDate);
     if (fields.name) { this.name = fields.name; }

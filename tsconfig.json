@@ -1,16 +1,26 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
     "lib": [
-      "esnext"
+      "es5"
     ],
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./api",
+    "paths": {
+      "@models": ["models/*"],
+      "@functions": ["functions/*"],
+      "@layers": ["layers/*"]
+    }
   },
   "exclude": [
     "node_modules",
     ".serverless",
-    ".webpack"
+    ".webpack",
+    ".circleci",
+    "users",
+    "projects",
+    "db"
   ]
 }
