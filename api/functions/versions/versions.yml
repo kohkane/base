@@ -6,12 +6,12 @@ versionsGet:
       - api/functions/versions/methods/get.ts
   events:
     - http:
-        path: version
+        path: versions
         method: get
         cors: true
         documentation:
-          summary: "Gets a specific or current version"
-          description: "Retrieves a specific or current version based on if an Id is optionally set"
+          summary: "Gets all versions"
+          description: "Retrieves all of the versions for the passed in user and project"
           tags:
             - "GET"
           requestHeaders:
@@ -27,6 +27,60 @@ versionsGet:
               name: "project"
               description: "The slug of the project to get the version of"
               required: true
+          methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": VersionsGetResponse
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse401Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse403Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
+    - http:
+        path: version/current
+        method: get
+        cors: true
+        documentation:
+          summary: "Gets the current version"
+          description: "Retrieves a the current version from the passed in user and project"
+          tags:
+            - "GET"
+          requestHeaders:
+            -
+              name: "x-api-key"
+              description: "The signed in user's api key"
+          queryParams:
+            -
+              name: "username"
+              description: "The username of the user to find the project of"
+              required: true
+            -
+              name: "project"
+              description: "The slug of the project to get the version of"
+              required: true
+          methodResponses:
+            -
+              statusCode: "200"
+              responseModels:
+                "application/json": VersionsGetResponse
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse401Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse403Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
+    - http:
+        path: version/{id}
+        method: get
+        cors: true
+        documentation:
+          summary: "Gets a specific version"
+          description: "Retrieves a version from the passed in Id"
+          tags:
+            - "GET"
+          requestHeaders:
+            -
+              name: "x-api-key"
+              description: "The signed in user's api key"
+          pathParams:
             -
               name: "id"
               description: "The id of a version to get"

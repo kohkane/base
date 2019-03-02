@@ -9,7 +9,7 @@ Object.keys(slsw.lib.entries).forEach(
 
 module.exports = {
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
-  devtool: 'source-map',
+  devtool: slsw.lib.webpack.isLocal ? 'source-map' : '',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
@@ -24,6 +24,5 @@ module.exports = {
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       { test: /\.tsx?$/, loader: 'ts-loader' },
     ],
-    noParse: [/aws-\-sdk/],
   },
 };

@@ -31,10 +31,12 @@ export class Response {
     // The response time in MS
     responseTime: number,
   }) {
+    this.status = object.status;
+    if (object.statusCode) { this.statusCode = object.statusCode; }
+    if (object.message) { this.message = object.message; }
+    if (object.data) { this.data = object.data; }
     // Convert response time to Seconds
     this.responseTime = `${object.responseTime / 1000}s`;
-    delete object.responseTime;
-    Object.assign(this, object);
   }
   /**
    * Prepares the response to be properly sent through an api call by formatting it

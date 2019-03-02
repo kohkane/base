@@ -38,26 +38,25 @@ provider:
 package:
   individually: true
   exclude:
-    - .*/**
+    - ".*/**"
 
 custom:
   serverless-offline:
     port: '3000'
     host: '0.0.0.0'
   documentation:
-    api:
-      info:
-        version: "0.0.1"
-        title: The API for Kohkane
-        description: The API that powers all of the Kohkane products
-        termsOfService: https://kohkane.com/tos
-        contact:
-          name: Jordan Skomer
-          url: https://kohkane.com
-          email: dev@kohkane.com
-        license:
-          name: MIT
-          url: https://kohkane.com/license
+    info:
+      version: "0.0.1"
+      title: The API for Kohkane
+      description: The API that powers all of the Kohkane products
+      termsOfService: https://kohkane.com/tos
+      contact:
+        name: Jordan Skomer
+        url: https://kohkane.com
+        email: dev@kohkane.com
+      license:
+        name: MIT
+        url: https://kohkane.com/license
     models:
       -
         name: ErrorResponse
@@ -66,8 +65,9 @@ custom:
         schema: ${file(api/functions/schemas/ErrorResponse.json)}
       -
         name: VersionsGetResponse
+        description: "The response that gets returned from GET /version/{id?}, GET /version/current, and GET /versions"
         contentType: "application/json"
-        schema: ${file(api/functions/versions/schemas/get.json)}
+        schema: ${file(api/functions/schemas/VersionsGetResponse.json)}
   commonModelSchemaFragments:
     MethodResponse400Json:
       statusCode: "400"
@@ -88,15 +88,4 @@ custom:
 
 functions:
   - ${file(api/functions/versions/versions.yml)}
-
-resources:
-  Resources:
-    pathmapping:
-      Type: AWS::ApiGateway::BasePathMapping
-      Properties:
-        BasePath: ${self:provider.stage}
-        DomainName: api.kohkane.com
-        RestApiId:
-          Ref: ApiGatewayRestApi
-        Stage: ${self:provider.stage}
 
