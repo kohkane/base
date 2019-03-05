@@ -4,10 +4,7 @@ interface LambdaResponse {
   statusCode: ResponseStatusCode;
 }
 
-export enum ResponseStatus {
-  ok = 'ok',
-  error = 'error',
-}
+type ResponseStatus = 'ok' | 'error';
 
 export enum ResponseStatusCode {
   BadRequest = 400,

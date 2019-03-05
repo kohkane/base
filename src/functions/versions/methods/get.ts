@@ -1,4 +1,4 @@
-import { Response, ResponseStatus, ResponseStatusCode } from '../../../models/Response';
+import { Response, ResponseStatusCode } from '@models/Response';
 import S3 = require('aws-sdk/clients/s3');
 import { retrieveVersionNumber, STASH_BUCKET } from '../helper';
 const Promise = require('es6-promise').Promise;
@@ -11,7 +11,7 @@ const getVersion = (queryParams) => {
       reject(new Response({
         message: 'Username or project param is missing',
         responseTime: new Date().getTime() - startTime,
-        status: ResponseStatus.error,
+        status: 'error',
         statusCode: ResponseStatusCode.BadRequest,
       }));
     }
@@ -24,7 +24,7 @@ const getVersion = (queryParams) => {
         reject(new Response({
           message: 'Error retrieving versions from S3',
           responseTime: new Date().getTime() - startTime,
-          status: ResponseStatus.error,
+          status: 'error',
           statusCode: ResponseStatusCode.BadRequest,
         }));
       } else {
@@ -49,7 +49,7 @@ const getVersion = (queryParams) => {
             },
           } },
           responseTime: new Date().getTime() - startTime,
-          status: ResponseStatus.ok,
+          status: 'ok',
         }));
       }
     });

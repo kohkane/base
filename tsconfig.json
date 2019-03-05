@@ -7,20 +7,16 @@
     ],
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "./api",
+    "baseUrl": ".",
     "paths": {
-      "@models": ["models/*"],
-      "@functions": ["functions/*"],
-      "@layers": ["layers/*"]
+      "@models/*": ["./src/models/*"],
+      "@functions/*": ["./src/functions/*"],
+      "@schemas/*": ["./src/schemas/*"],
+      "@layers/*": ["./src/layers/*"],
     }
   },
-  "exclude": [
-    "node_modules",
-    ".serverless",
-    ".webpack",
-    ".circleci",
-    "users",
-    "projects",
-    "db"
+  "include": [
+    "./src/functions/**/*",
+    "./src/models/**/*",
   ]
 }

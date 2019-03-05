@@ -1,9 +1,9 @@
 versionsGet:
-  handler: api/functions/versions/methods/get.handler
+  handler: src/functions/versions/methods/get.handler
   description: Gets a specific, or current version for the signed in User
   package:
     include:
-      - api/functions/versions/methods/get.ts
+      - src/functions/versions/methods/get.ts
   events:
     - http:
         path: versions
@@ -94,4 +94,32 @@ versionsGet:
             - ${self:custom.commonModelSchemaFragments.MethodResponse403Json}
             - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}
 
-
+versionsDelete:
+  handler: src/functions/versions/methods/delete.handler
+  description: Deletes a version signed in User
+  package:
+    include:
+      - src/functions/versions/methods/delete.ts
+  events:
+    - http:
+        path: version/{id}
+        method: delete
+        cors: true
+        documentation:
+          summary: "Deletes a version"
+          description: "Deletes the version from S3 that matches the passed in id"
+          tags:
+            - "DELETE"
+          requestHeaders:
+            -
+              name: "x-api-key"
+              description: "The signed in user's api key"
+          pathParams:
+            -
+              name: "id"
+              description: "The id of a version to delete"
+          methodResponses:
+            - ${self:custom.commonModelSchemaFragments.MethodResponse400Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse401Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse403Json}
+            - ${self:custom.commonModelSchemaFragments.MethodResponse404Json}

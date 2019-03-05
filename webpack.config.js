@@ -1,17 +1,16 @@
 const path = require('path');
 const slsw = require('serverless-webpack');
-
-const entries = {};
-
-Object.keys(slsw.lib.entries).forEach(
-  key => (entries[key] = ['./source-map-install.js', slsw.lib.entries[key]])
-);
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 module.exports = {
+  entry: slsw.lib.entries,
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
-  devtool: slsw.lib.webpack.isLocal ? 'source-map' : '',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    plugins: [
+      new TsConfigPathsPlugin()
+    ]
   },
   output: {
     libraryTarget: 'commonjs',
@@ -22,7 +21,15 @@ module.exports = {
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: 'ts-loader' },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        include: [
+          path.resolve(__dirname, 'src/functions'),
+          path.resolve(__dirname, 'src/models'),
+          path.resolve(__dirname, 'src/layers'),
+        ]
+      },
     ],
   },
 };
