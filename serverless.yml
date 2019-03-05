@@ -62,12 +62,12 @@ custom:
         name: ErrorResponse
         description: "The response that gets returned when an error is encountered"
         contentType: "application/json"
-        schema: ${file(api/functions/schemas/ErrorResponse.json)}
+        schema: ${file(api/schemas/ErrorResponse.json)}
       -
         name: VersionsGetResponse
         description: "The response that gets returned from GET /version/{id?}, GET /version/current, and GET /versions"
         contentType: "application/json"
-        schema: ${file(api/functions/schemas/VersionsGetResponse.json)}
+        schema: ${file(api/schemas/VersionsGetResponse.json)}
   commonModelSchemaFragments:
     MethodResponse400Json:
       statusCode: "400"
