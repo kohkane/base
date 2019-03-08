@@ -5,11 +5,16 @@ const Promise = require('es6-promise').Promise;
 const s3 = new S3();
 let startTime;
 
-const getVersion = (queryParams) => {
+export const getVersion = (queryParams) => {
   return new Promise((resolve, reject) => {
-    if (!queryParams && !queryParams.username && !queryParams.project) {
+    if (!queryParams.username || !queryParams.project) {
       reject(new Response({
-        message: 'Username or project param is missing',
+        message: `${(!queryParams.username && !queryParams.project) ?
+            'username and project are' :
+            !queryParams.username ?
+            'username is' :
+            'project is'
+          } missing from query parameters.`,
         responseTime: new Date().getTime() - startTime,
         status: 'error',
         statusCode: ResponseStatusCode.BadRequest,

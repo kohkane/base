@@ -35,6 +35,24 @@ provider:
          - "s3:PutObject"
        Resource: "arn:aws:s3:::com.kohkane.deploy/*"
 
+layers:
+  s3:
+    path: src/functions/layers/s3
+    name: ${self:provider.stage}-s3
+    description: The layer that handles all of the S3 credentials and setup
+    compatibleRuntimes:
+      - node8.10
+    package:
+      include:
+        - node_modules/aws-sdk/clients/s3
+  general:
+    path: src/functions/layers/general
+    name: ${self:provider.stage}-general
+    description: The layer that contains all of the methods used by every function
+    compatibleRuntimes:
+      - node8.10
+
+
 package:
   individually: true
   exclude:

@@ -2,6 +2,14 @@ const path = require('path');
 const slsw = require('serverless-webpack');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
+// const layerShims = slsw.lib.webpack.isLocal ? [] : [
+//   new webpack.ProvidePlugin({
+//     s3: './src/layers/s3/s3.ts'
+//   })
+// ]
+
+
+
 module.exports = {
   entry: slsw.lib.entries,
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
@@ -17,6 +25,7 @@ module.exports = {
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js',
   },
+  // plugins: layerShims,
   target: 'node',
   module: {
     rules: [
