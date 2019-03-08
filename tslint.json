@@ -41,6 +41,7 @@
       true,
       "spaces"
     ],
+    "no-var-requires": false,
     "no-inferrable-types": true,
     "no-internal-module": true,
     "no-null-keyword": true,

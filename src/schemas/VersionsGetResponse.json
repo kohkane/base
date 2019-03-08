@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Versions Get Response Schema",
+  "type": "object",
+  "properties": {
+    "status":  { "type": "string" },
+    "statusCode":  { "type": "string" },
+    "responseTime": { "type":  "string" },
+    "data": {
+      "type": "object",
+      "properties": {
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "bucket": { "type": "string" },
+              "fileCount": {
+                "type": "object",
+                "properties": {
+                  "db": { "type": "number" },
+                  "media": { "type": "number" },
+                  "plugins": { "type": "number" },
+                  "theme": { "type": "number" },
+                  "total": { "type": "number" }
+                }
+              },
+              "number": { "type": "number" },
+              "path": { "type": "string" },
+              "stashes": {
+                "type": "object",
+                "properties": {
+                  "db": { "type": "boolean" },
+                  "media": { "type": "boolean" },
+                  "plugins": { "type": "boolean" },
+                  "theme": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

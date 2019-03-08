@@ -1,15 +1,14 @@
 module.exports = {
-  moduleFileExtensions: ['ts', 'js', 'json'],
+  moduleFileExtensions: ["ts", "tsx", "js", "json"],
   transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.tsx?$': 'ts-jest',
-  },
-  modulePaths: ['<rootDir>/node_modules/'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  moduleNameMapper: {
-    "^helpers$": "<rootDir>/helpers.ts",
+    "^.+\\.(ts|tsx)$": "ts-jest"
   },
   preset: 'ts-jest',
-  testEnvironment: 'node',
-  collectCoverage: true,
+  testMatch: ["**/src/functions/**/*.(unit|integration).test.+(ts|tsx|js)"],
+  testPathIgnorePatterns: ["/node_modules/", "/dist/", "/lib/"],
+  verbose: false,
+  moduleNameMapper: {
+    "@functions/(.*)": "<rootDir>/src/functions/$1",
+    "@models/(.*)": "<rootDir>/src/models/$1",
+  }
 };

@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Error Response Schema",
+  "type": "object",
+  "properties": {
+    "status":  { "type": "string" },
+    "statusCode":  { "type": "string" },
+    "messages":  {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "responseTime": { "type":  "string" }
+  }
+}
